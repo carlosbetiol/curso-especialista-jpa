@@ -1,35 +1,36 @@
 package com.algaworks.ecommerce.model;
 
-import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.math.BigDecimal;
 
-@Getter
 @Setter
+@Getter
 @Entity
-@Table(name = "produto")
-public class Produto {
+@Table(name = "pagamento_cartao")
+public class PagamentoCartao {
 
     @Id
     private Integer id;
 
-    private String nome;
-    private String descricao;
-    private BigDecimal preco;
+    @Column(name="pedido_id")
+    private Integer pedidoId;
+
+    @Enumerated(EnumType.STRING)
+    private StatusPagamento status;
+
+    private String numero;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Produto produto = (Produto) o;
+        PagamentoCartao pagamentoCartao = (PagamentoCartao) o;
 
-        return id.equals(produto.id);
+        return id.equals(pagamentoCartao.id);
     }
 
     @Override

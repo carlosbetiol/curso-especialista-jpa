@@ -5,28 +5,32 @@ import lombok.Setter;
 
 import javax.persistence.*;
 
-@Getter
 @Setter
+@Getter
 @Entity
-@Table(name = "cliente")
-public class Cliente {
+@Table(name = "pagamento_boleto")
+public class PagamentoBoleto {
 
     @Id
     private Integer id;
 
-    private String nome;
+    @Column(name="pedido_id")
+    private Integer pedidoId;
 
     @Enumerated(EnumType.STRING)
-    private SexoCliente sexo;
+    private StatusPagamento status;
+
+    @Column(name="codigo_barras")
+    private String codigoBarras;
 
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        Cliente cliente = (Cliente) o;
+        PagamentoBoleto pagamentoBoleto = (PagamentoBoleto) o;
 
-        return id.equals(cliente.id);
+        return id.equals(pagamentoBoleto.id);
     }
 
     @Override
