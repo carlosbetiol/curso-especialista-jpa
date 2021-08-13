@@ -14,6 +14,7 @@ import java.time.LocalDateTime;
 public class Pedido {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name="data_pedido")
@@ -29,6 +30,9 @@ public class Pedido {
     private StatusPedido status;
 
     private BigDecimal total;
+
+    @Embedded
+    private EnderecoEntregaPedido enderecoEntrega;
 
     @Override
     public boolean equals(Object o) {

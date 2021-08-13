@@ -14,6 +14,7 @@ import java.util.Date;
 public class NotaFiscal {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @Column(name="pedido_id")
