@@ -17,6 +17,10 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @ManyToOne
+    @JoinColumn(name = "cliente_id")
+    private Cliente cliente; // pega cliente_id de forma automatica qdo nao tem mapeamento de coluna
+
     @Column(name="data_pedido")
     private LocalDateTime dataPedido;
 
