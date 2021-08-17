@@ -8,7 +8,7 @@ import org.junit.Test;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-public class RelacionamentoManyToOneTest extends EntityManagerTest {
+public class RelacionamentoOneToManyTest extends EntityManagerTest {
 
     @Test
     public void verificarRelacionamento() {
@@ -27,8 +27,8 @@ public class RelacionamentoManyToOneTest extends EntityManagerTest {
 
         entityManager.clear();
 
-        Pedido pedidoVerificacao = entityManager.find(Pedido.class, pedido.getId());
-        Assert.assertNotNull(pedidoVerificacao.getCliente());
+        Cliente clienteVerificacao = entityManager.find(Cliente.class, cliente.getId());
+        Assert.assertFalse(clienteVerificacao.getPedidos().isEmpty());
 
     }
 
@@ -41,6 +41,7 @@ public class RelacionamentoManyToOneTest extends EntityManagerTest {
         pedido.setStatus(StatusPedido.AGUARDANDO);
         pedido.setDataPedido(LocalDateTime.now());
         pedido.setTotal(BigDecimal.TEN);
+
         pedido.setCliente(cliente);
 
         ItemPedido itemPedido = new ItemPedido();
@@ -56,9 +57,11 @@ public class RelacionamentoManyToOneTest extends EntityManagerTest {
 
         entityManager.clear();
 
-        ItemPedido ItemPedidoVerificacao = entityManager.find(ItemPedido.class, itemPedido.getId());
-        Assert.assertNotNull(ItemPedidoVerificacao.getPedido());
-        Assert.assertNotNull(ItemPedidoVerificacao.getProduto());
+        Pedido pedidoVerificacao = entityManager.find(Pedido.class, pedido.getId());
+        Produto produtoVerificacao = entityManager.find(Produto.class, itemPedido.getProduto().getId());
+        Assert.assertFalse(pedidoVerificacao.getItensPedidos().isEmpty());
+        Assert.assertFalse(produtoVerificacao.getItensPedidos().isEmpty());
 
     }
+
 }
