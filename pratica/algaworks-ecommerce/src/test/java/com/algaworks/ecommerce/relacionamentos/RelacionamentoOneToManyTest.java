@@ -59,8 +59,7 @@ public class RelacionamentoOneToManyTest extends EntityManagerTest {
 
         Pedido pedidoVerificacao = entityManager.find(Pedido.class, pedido.getId());
         Produto produtoVerificacao = entityManager.find(Produto.class, itemPedido.getProduto().getId());
-        Assert.assertFalse(pedidoVerificacao.getItensPedidos().isEmpty());
-        Assert.assertFalse(produtoVerificacao.getItensPedidos().isEmpty());
+        Assert.assertFalse(pedidoVerificacao.getItens().isEmpty());
 
     }
 

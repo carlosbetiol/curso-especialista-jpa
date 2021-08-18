@@ -40,7 +40,7 @@ public class Pedido {
     private EnderecoEntregaPedido enderecoEntrega;
 
     @OneToMany(mappedBy = "pedido")
-    private List<ItemPedido> itensPedidos;
+    private List<ItemPedido> itens;
 
     @Override
     public boolean equals(Object o) {
