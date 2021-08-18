@@ -18,7 +18,7 @@ public class Pedido {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "cliente_id")
     private Cliente cliente; // pega cliente_id de forma automatica qdo nao tem mapeamento de coluna
 
@@ -28,18 +28,21 @@ public class Pedido {
     @Column(name="data_conclusao")
     private LocalDateTime dataConclusao;
 
-    @Column(name="nota_fiscal_id")
-    private Integer notaFiscalId;
-
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
     private BigDecimal total;
 
+    @OneToOne(mappedBy = "pedido")
+    private PagamentoCartao pagamento;
+
+    @OneToOne(mappedBy = "pedido")
+    private NotaFiscal notafiscal;
+
     @Embedded
     private EnderecoEntregaPedido enderecoEntrega;
 
-    @OneToMany(mappedBy = "pedido")
+    @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
     private List<ItemPedido> itens;
 
     @Override

@@ -4,20 +4,22 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 
 @Setter
 @Getter
 @Entity
-@Table(name = "pagamento_cartao")
+@Table(name = "pagamento_cartao", uniqueConstraints = {
+        @UniqueConstraint(name="uk_npagamento_cartao_pedido_id", columnNames = { "pedido_id"} )
+})
 public class PagamentoCartao {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="pedido_id")
-    private Integer pedidoId;
+    @OneToOne(optional = false)
+    @JoinColumn(name="pedido_id")
+    private Pedido pedido;
 
     @Enumerated(EnumType.STRING)
     private StatusPagamento status;

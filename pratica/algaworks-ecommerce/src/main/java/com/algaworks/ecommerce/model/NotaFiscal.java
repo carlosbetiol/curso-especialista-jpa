@@ -10,28 +10,23 @@ import java.util.Date;
 @Setter
 @Getter
 @Entity
-@Table(name = "nota_fiscal")
+@Table(name = "nota_fiscal", uniqueConstraints = {
+        @UniqueConstraint(name="uk_nota_fiscal_pedido_id", columnNames = { "pedido_id"} )
+})
 public class NotaFiscal {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name="pedido_id")
-    private Integer pedidoId;
+    @OneToOne(optional = false)
+    @JoinColumn(name="pedido_id")
+    private Pedido pedido;
 
     private String xml;
 
     @Column(name="data_emissao")
     private Date dataEmissao;
-
-    @Column(name="nota_fiscal_id")
-    private Integer notaFiscalId;
-
-    @Enumerated(EnumType.STRING)
-    private StatusPedido status;
-
-    private BigDecimal total;
 
     @Override
     public boolean equals(Object o) {

@@ -27,6 +27,9 @@ public class Produto {
         inverseJoinColumns = @JoinColumn(name = "categoria_id"))
     private List<Categoria> categorias;
 
+    @OneToOne(mappedBy = "produto")
+    private Estoque estoque;
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
