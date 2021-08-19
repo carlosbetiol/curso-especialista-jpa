@@ -42,7 +42,7 @@ public class Pedido {
     @Embedded
     private EnderecoEntregaPedido enderecoEntrega;
 
-    @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER )
     private List<ItemPedido> itens;
 
     @Override
