@@ -22,8 +22,11 @@ public class Pedido {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente; // pega cliente_id de forma automatica qdo nao tem mapeamento de coluna
 
-    @Column(name="data_pedido")
-    private LocalDateTime dataPedido;
+    @Column(name="data_criacao")
+    private LocalDateTime dataCriacao;
+
+    @Column(name="data_ultima_atualizacao")
+    private LocalDateTime dataUltimaAtualizacao;
 
     @Column(name="data_conclusao")
     private LocalDateTime dataConclusao;
@@ -44,6 +47,56 @@ public class Pedido {
 
     @OneToMany(mappedBy = "pedido", fetch = FetchType.EAGER )
     private List<ItemPedido> itens;
+
+    public boolean isPago() {
+        return StatusPedido.PAGO.equals(status);
+    }
+
+    public void calcularTotal() {
+        if (itens !=  null) {
+            total = itens.stream().map(ItemPedido::getPrecoProduto)
+                    .reduce(BigDecimal.ZERO, BigDecimal::add);
+        }
+    }
+
+    // métodos anotados com @PrePersist e @PreUpdate são chamados de métodos de callback
+    @PrePersist
+    public void aoPersistir() {
+        dataCriacao = LocalDateTime.now();
+        calcularTotal();
+    }
+
+    @PreUpdate
+    public void aoAtualizar() {
+        dataUltimaAtualizacao = LocalDateTime.now();
+        calcularTotal();
+    }
+
+    // outros métodos de callback relacionados abaixo
+    @PostPersist
+    public void aposPersistir() {
+        System.out.println("Após persistir Pedido.");
+    }
+
+    @PostUpdate
+    public void aposAtualizar() {
+        System.out.println("Após atualizar Pedido.");
+    }
+
+    @PreRemove
+    public void aoRemover() {
+        System.out.println("Antes de remover Pedido.");
+    }
+
+    @PostRemove
+    public void aposRemover() {
+        System.out.println("Após remover Pedido.");
+    }
+
+    @PostLoad
+    public void aoCarregar() {
+        System.out.println("Após carregar Pedido.");
+    }
 
     @Override
     public boolean equals(Object o) {
