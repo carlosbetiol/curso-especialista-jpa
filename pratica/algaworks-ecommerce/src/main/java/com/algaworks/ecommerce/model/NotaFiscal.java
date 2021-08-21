@@ -4,26 +4,26 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.util.Date;
 
 @Setter
 @Getter
 @Entity
-@Table(name = "nota_fiscal", uniqueConstraints = {
-        @UniqueConstraint(name="uk_nota_fiscal_pedido_id", columnNames = { "pedido_id"} )
-})
+@Table(name = "nota_fiscal")
 public class NotaFiscal {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "pedido_id")
     private Integer id;
 
+    @MapsId // com isso, ao tentar persistir nao precisa fazer setId direto, ele pega daqui.
     @OneToOne(optional = false)
-    @JoinColumn(name="pedido_id")
+//    @JoinColumn(name="pedido_id", insertable = false, updatable = false)
+    @JoinColumn(name="pedido_id") // usando MapsId remove-se insertable e updatable
     private Pedido pedido;
 
-    private String xml;
+    @Lob
+    private byte[] xml;
 
     @Column(name="data_emissao")
     private Date dataEmissao;

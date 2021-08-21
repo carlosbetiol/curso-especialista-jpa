@@ -1,7 +1,6 @@
 package com.algaworks.ecommerce.model;
 
 import com.algaworks.ecommerce.listener.GenericoListener;
-import com.algaworks.ecommerce.listener.GerarNotaFiscalListener;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -39,6 +38,20 @@ public class Produto {
 
     @Column(name="data_ultima_atualizacao", insertable = false)
     private LocalDateTime dataUltimaAtualizacao;
+
+    @ElementCollection
+    @CollectionTable(name = "produto_tag",
+            joinColumns = @JoinColumn(name = "produto_id"))
+    @Column(name = "tag")
+    private List<String> tags;
+
+    @ElementCollection
+    @CollectionTable(name = "produto_atributo",
+            joinColumns = @JoinColumn(name = "produto_id"))
+    private List<Atributo> atributos;
+
+    @Lob
+    private byte[] foto;
 
     @Override
     public boolean equals(Object o) {

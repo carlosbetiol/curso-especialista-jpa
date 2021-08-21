@@ -8,15 +8,13 @@ import javax.persistence.*;
 @Setter
 @Getter
 @Entity
-@Table(name = "pagamento_cartao", uniqueConstraints = {
-        @UniqueConstraint(name="uk_npagamento_cartao_pedido_id", columnNames = { "pedido_id"} )
-})
+@Table(name = "pagamento_cartao")
 public class PagamentoCartao {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @MapsId
     @OneToOne(optional = false)
     @JoinColumn(name="pedido_id")
     private Pedido pedido;

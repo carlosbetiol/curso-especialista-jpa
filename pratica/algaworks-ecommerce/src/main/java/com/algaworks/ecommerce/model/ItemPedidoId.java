@@ -14,7 +14,7 @@ import java.io.Serializable;
 @NoArgsConstructor
 @AllArgsConstructor
 @Embeddable
-public class ItemPedidoId implements Serializable{
+public class ItemPedidoId implements Serializable {
 
     @Column(name = "pedido_id")
     private Integer pedidoId;
