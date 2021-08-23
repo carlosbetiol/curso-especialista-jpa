@@ -13,11 +13,7 @@ import java.util.Map;
 @SecondaryTable(name = "cliente_detalhe", pkJoinColumns = @PrimaryKeyJoinColumn(name = "cliente_id"))
 @Entity
 @Table(name = "cliente")
-public class Cliente {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class Cliente extends EntidadeBaseInteger{
 
     private String nome;
 
@@ -51,18 +47,4 @@ public class Cliente {
     @OneToMany(mappedBy = "cliente")
     private List<Pedido> pedidos;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Cliente cliente = (Cliente) o;
-
-        return id.equals(cliente.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
 }

@@ -9,11 +9,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "pagamento_boleto")
-public class PagamentoBoleto {
-
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+public class PagamentoBoleto extends EntidadeBaseInteger {
 
     @Column(name="pedido_id")
     private Integer pedidoId;
@@ -24,18 +20,4 @@ public class PagamentoBoleto {
     @Column(name="codigo_barras")
     private String codigoBarras;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PagamentoBoleto pagamentoBoleto = (PagamentoBoleto) o;
-
-        return id.equals(pagamentoBoleto.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
 }

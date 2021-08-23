@@ -9,10 +9,7 @@ import javax.persistence.*;
 @Getter
 @Entity
 @Table(name = "pagamento_cartao")
-public class PagamentoCartao {
-
-    @Id
-    private Integer id;
+public class PagamentoCartao extends EntidadeBaseInteger{
 
     @MapsId
     @OneToOne(optional = false)
@@ -24,18 +21,4 @@ public class PagamentoCartao {
 
     private String numero;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        PagamentoCartao pagamentoCartao = (PagamentoCartao) o;
-
-        return id.equals(pagamentoCartao.id);
-    }
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
 }

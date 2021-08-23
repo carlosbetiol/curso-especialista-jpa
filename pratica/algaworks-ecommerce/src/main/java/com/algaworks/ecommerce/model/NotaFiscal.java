@@ -10,11 +10,7 @@ import java.util.Date;
 @Getter
 @Entity
 @Table(name = "nota_fiscal")
-public class NotaFiscal {
-
-    @Id
-    @Column(name = "pedido_id")
-    private Integer id;
+public class NotaFiscal extends EntidadeBaseInteger{
 
     @MapsId // com isso, ao tentar persistir nao precisa fazer setId direto, ele pega daqui.
     @OneToOne(optional = false)
@@ -28,19 +24,4 @@ public class NotaFiscal {
     @Column(name="data_emissao")
     private Date dataEmissao;
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        NotaFiscal notaFiscal = (NotaFiscal) o;
-
-        return id.equals(notaFiscal.id);
-    }
-
-
-    @Override
-    public int hashCode() {
-        return id.hashCode();
-    }
 }
