@@ -36,7 +36,7 @@ public class Pedido extends EntidadeBaseInteger {
     private BigDecimal total;
 
     @OneToOne(mappedBy = "pedido")
-    private PagamentoCartao pagamento;
+    private Pagamento pagamento; // referencia à classe abstrata
 
     @OneToOne(mappedBy = "pedido")
     private NotaFiscal notafiscal;

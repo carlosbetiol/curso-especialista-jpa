@@ -7,15 +7,11 @@ import javax.persistence.*;
 
 @Setter
 @Getter
+@DiscriminatorValue("boleto") // valor a diferenciar na DiscriminatorColumn na tabela Pagamento, usado somente em single table strategy
 @Entity
-@Table(name = "pagamento_boleto")
-public class PagamentoBoleto extends EntidadeBaseInteger {
-
-    @Column(name="pedido_id")
-    private Integer pedidoId;
-
-    @Enumerated(EnumType.STRING)
-    private StatusPagamento status;
+//@Table(name = "pagamento_boleto") // em singletable essa tabela é ignorada, fica tudo na pagamento
+//@Table(name = "pagamento_boleto") // na estrategia table_per_class, isso é necessário
+public class PagamentoBoleto extends Pagamento {
 
     @Column(name="codigo_barras")
     private String codigoBarras;
