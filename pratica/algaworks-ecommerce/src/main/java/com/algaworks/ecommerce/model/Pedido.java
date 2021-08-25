@@ -21,7 +21,7 @@ public class Pedido extends EntidadeBaseInteger {
     @JoinColumn(name = "cliente_id")
     private Cliente cliente; // pega cliente_id de forma automatica qdo nao tem mapeamento de coluna
 
-    @Column(name="data_criacao", updatable = false)
+    @Column(name="data_criacao", updatable = false, nullable = false)
     private LocalDateTime dataCriacao;
 
     @Column(name="data_ultima_atualizacao", insertable = false)
@@ -30,9 +30,11 @@ public class Pedido extends EntidadeBaseInteger {
     @Column(name="data_conclusao")
     private LocalDateTime dataConclusao;
 
+    @Column(length = 30, nullable = false)
     @Enumerated(EnumType.STRING)
     private StatusPedido status;
 
+    @Column(nullable = false)
     private BigDecimal total;
 
     @OneToOne(mappedBy = "pedido")

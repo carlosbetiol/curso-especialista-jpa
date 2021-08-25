@@ -16,8 +16,10 @@ import java.util.Map;
     indexes = { @Index(name = "idx_nome", columnList = "nome")})
 public class Cliente extends EntidadeBaseInteger{
 
+    @Column(length = 100, nullable = false)
     private String nome;
 
+    @Column(length = 14, nullable = false)
     private String cpf;
 
     @ElementCollection
@@ -30,7 +32,7 @@ public class Cliente extends EntidadeBaseInteger{
     @Transient
     private String primeiroNome;
 
-    @Column(table = "cliente_detalhe") // indica que esta coluna vai ser armazenada na tabela secundária cliente_detalhe
+    @Column(table = "cliente_detalhe", length = 30, nullable = false) // indica que esta coluna vai ser armazenada na tabela secundária cliente_detalhe
     @Enumerated(EnumType.STRING)
     private SexoCliente sexo;
 

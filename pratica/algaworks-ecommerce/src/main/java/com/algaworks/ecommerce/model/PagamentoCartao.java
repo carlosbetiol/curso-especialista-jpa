@@ -13,7 +13,7 @@ import javax.persistence.*;
 //@Table(name = "pagamento_cartao") // na estrategia table_per_class, isso é necessário
 public class PagamentoCartao extends Pagamento {
 
-    @Column(name = "numero_cartao")
+    @Column(name = "numero_cartao", length = 50, nullable = false)
     private String numeroCartao;
 
 }
